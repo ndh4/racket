@@ -20,6 +20,8 @@
          contract-random-generate-fail
          contract-random-generate-fail?
          contract-random-generate-env?
+         current-contract-pseudo-random-generator
+         contract-random-generate-seed
          contract-exercise
          get/build-val-first-projection
          contract-custom-write-property-proc)

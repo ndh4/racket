@@ -4192,3 +4192,21 @@ ended up returning @racket[contract-random-generate-fail].
 
 @history[#:added "6.1.1.5"]
 }
+
+@defparam[current-contract-pseudo-random-generator
+          rand-gen
+          pseudo-random-generator?]{
+ A @tech{parameter} that determines the the pseudo-random number generator
+ used by @racket[contract-random-generate] and @racket[contract-exercise].
+
+ @history[#:added "9.3.0.2"]
+}
+
+@defproc[(contract-random-generate-seed [k (integer-in 0 (sub1 (expt 2 31)))])
+         void?]{
+
+ Like @racket[random-seed], except that it seeds
+ @racket[(current-contract-pseudo-random-generator)]
+ rather than the current pseudo-random number generator.
+
+ @history[#:added "9.3.0.2"]}
