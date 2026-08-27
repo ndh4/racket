@@ -641,10 +641,11 @@
   (check-not-exn (λ () (test-contract-generation (make-gen-choose/c)))))
 
 
-;; test contract-random-generate-seed
+;; test simple seeding for current-contract-pseudo-random-generator
 (define (test-seeding ctc seed)
   (define (seed-and-generate)
-    (contract-random-generate-seed seed)
+    (parameterize ([current-pseudo-random-generator (current-contract-pseudo-random-generator)])
+      (random-seed seed))
     (contract-random-generate ctc))
 
   (define generated1 (seed-and-generate))
@@ -661,7 +662,7 @@
 (check-not-exn (λ () (test-seeding number? 43)))
 (check-not-exn (λ () (test-seeding string? 125290)))
 
-;; test current-contract-pseudo-random-generator
+;; test seeding current-contract-pseudo-random-generator directly with vector
 (define (test-seed-by-vector ctc vec)
   (define (vector-set-and-generate)
     (vector->pseudo-random-generator!
